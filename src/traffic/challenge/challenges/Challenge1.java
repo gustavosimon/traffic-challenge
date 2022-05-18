@@ -49,10 +49,18 @@ public final class Challenge1 implements Challenge {
         for (int i = 0; i < image.getWidth(); i++) {
             for (int j = 0; j < image.getHeight(); j++) {
                 if (new Color(auxMatrix[i][j]).getBlue() > 200) {
-                    processed.setRGB(i, j, new Color(0, 0, 0).getRGB());
+                    matrix[i][j] = new Color(0, 0, 0).getRGB();
                 } else {
-                    processed.setRGB(i, j, new Color(255, 255, 255).getRGB());
+                    matrix[i][j] = new Color(255, 255, 255).getRGB();
                 }
+            }
+        }
+        //
+        // todo: Aplicar o afinamento de Holt
+        //
+        for (int i = 0; i < image.getWidth(); i++) {
+            for (int j = 0; j < image.getHeight(); j++) {
+                processed.setRGB(i, j, new Color(matrix[i][j]).getRGB());
             }
         }
         ImageUtils.writeImage(processed, PROCESSED_IMAGE_PATH);
